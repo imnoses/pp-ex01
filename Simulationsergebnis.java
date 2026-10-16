@@ -1,9 +1,9 @@
 public class Simulationsergebnis {
-	private float A;
-	private float[] avgTenYears;
-	private float[] ueberschritten; //fuer jedes Jahr um wv prozent überscritten wurde
+	private double A;
+	private double[] avgTenYears;
+	private double[] ueberschritten; //fuer jedes Jahr um wv prozent überscritten wurde
 
-	public Simulationsergebnis(float A, float[] avgTenYears, float[] ueberschritten) {
+	public Simulationsergebnis(double A, double[] avgTenYears, double[] ueberschritten) {
 		this.A = A;
 		this.avgTenYears = avgTenYears;
 		this.ueberschritten = ueberschritten;
@@ -13,7 +13,7 @@ public class Simulationsergebnis {
 	public String printReport() {
 		int i = 0; 
 		String out = "A nach 100 Jahren: " + A + "\n";
-		for (float val : avgTenYears) {
+		for (double val : avgTenYears) {
 			int i += 1; 
 			out += i + " - ";
 			i+= 9;
@@ -32,14 +32,14 @@ public class Simulationsergebnis {
 
 }
 
-	public float getA() {
+	public double getA() {
 		return A;
 	}
 
-	public float[] getAvgTenYears() {
+	public double[] getAvgTenYears() {
 		return avgTenYears;
 	}
 
-	public float[] getUeberschritten() {
+	public double[] getUeberschritten() {
 		return ueberschritten;
 	}
