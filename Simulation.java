@@ -8,21 +8,6 @@ public class Simulation {
 	private static final double WATER_THRESHOLD_WIDENING = 1, WATER_COST_DIVISOR = 40;
 	private static final double MAX_YEARLY_GROWTH = 0.0035;
 
-	private static double simulateYear(double M, double A, RandomGenerator rng) {
-		double temp = rng.nextDouble(START_TEMP_MIN, START_TEMP_MAX);
-		double water = rng.nextDouble(START_WATER_MIN, START_WATER_MAX);
-		double immediateCostSum = 0;
-
-		for (int day = 0; day < DAYS_PER_YEAR; day++) {
-			temp += rng.nextDouble(-MAX_TEMP_STEP, MAX_TEMP_STEP);
-			water += rng.nextDouble(-MAX_WATER_STEP, MAX_WATER_STEP);
-
-			immediateCostSum += temperatureCosts(temp * A, M);
-			immediateCostSum += waterCosts(water * A, M);
-		}
-		return immediateCostSum;
-	}
-
 	private static double temperatureCosts(double tempAdj, double m) {
 		double threshold = START_TEMP_MAX + m * TEMP_THRESHOLD_WIDENING;
 		return Math.max(0, (tempAdj - threshold) / TEMP_COST_DIVISOR);
@@ -42,6 +27,21 @@ public class Simulation {
 		double sum = 0;
 		for (int i = from; i <= to; i++) sum += values[i];
 		return sum / (to - from + 1);
+	}
+
+	private static double simulateYear(double M, double A, RandomGenerator rng) {
+		double temp = rng.nextDouble(START_TEMP_MIN, START_TEMP_MAX);
+		double water = rng.nextDouble(START_WATER_MIN, START_WATER_MAX);
+		double immediateCostSum = 0;
+
+		for (int day = 0; day < DAYS_PER_YEAR; day++) {
+			temp += rng.nextDouble(-MAX_TEMP_STEP, MAX_TEMP_STEP);
+			water += rng.nextDouble(-MAX_WATER_STEP, MAX_WATER_STEP);
+
+			immediateCostSum += temperatureCosts(temp * A, M);
+			immediateCostSum += waterCosts(water * A, M);
+		}
+		return immediateCostSum;
 	}
 
 	public static Simulationsergebnis simulation(double M, double A, RandomGenerator rng) {
