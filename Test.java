@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.random.RandomGenerator;
 
 public class Test {
-    static void main() {
+    static void main(String[] args) {
         RandomGenerator rng = RandomGenerator.getDefault();
         System.out.println("TESTS UM DIE FUNKTIONALITAET DES PROGRAMMS ZU ÜBERPRÜFEN\n");
         System.out.println("RANDFALL 1: M=0% & A=1.0");
@@ -22,8 +24,29 @@ public class Test {
 
         System.out.println();
         System.out.println("88 Simulationslaeufe, der beste wird ausgegeben");
-        Zielfunktion z = new Zielfunktion();
-        haupt_durchlauf(rng, z);
+
+
+        ArrayList<Simulationsergebnis> simulationsergebnisse = new ArrayList<>();
+
+
+        HashMap<Double, ArrayList<Simulationsergebnis>> hm = haupt_durchlauf(rng);
+
+        for (List<Simulationsergebnis> l : hm.values()) {
+            simulationsergebnisse.addAll(l);
+        }
+
+        Simulationsergebnis[] res_array = new Simulationsergebnis[simulationsergebnisse.size()];
+        res_array = simulationsergebnisse.toArray(res_array);
+
+        Zielfunktion z = new Zielfunktion(res_array);
+        float res = z.calculateBest();
+
+        ArrayList<Simulationsergebnis> best_m = hm.get(res);
+
+        String final_report = "BEST RESULT HAS M = " + res + "\n Here are all the information for each run with M = " + res + ": \n";
+        for (Simulationsergebnis s : best_m) {
+            System.out.println(s.printReport());
+        }
 
     }
 
@@ -46,8 +69,9 @@ public class Test {
      * Die Ergebnisse werden gespeichert und das beste Ergebnis wird mittels Zielfunktion ausgegeben.
      * @return Das beste Ergebnis.
      */
-    public static float haupt_durchlauf(RandomGenerator rng, Zielfunktion z) {
-        ArrayList<Simulationsergebnis> simulationsergebnisse = new ArrayList<>();
+    public static HashMap<Double, ArrayList<Simulationsergebnis>> haupt_durchlauf(RandomGenerator rng) {
+        //ArrayList<Simulationsergebnis> simulationsergebnisse = new ArrayList<>();
+        HashMap<Double, ArrayList<Simulationsergebnis>> hm = new HashMap<>();
         ArrayList<Double> a_s = new ArrayList<>();
         ArrayList<Double> m_s = new ArrayList<>();
 
@@ -61,18 +85,14 @@ public class Test {
 
         Simulationsergebnis current;
 
-        for (double a : a_s) {
-            for (double m : m_s) {
+        for (double m : m_s) {
+            ArrayList<Simulationsergebnis> simulationsergebnisse = new ArrayList<>();
+            for (double a : a_s) {
                 current = Simulation.simulation(m, a, rng);
                 simulationsergebnisse.add(current);
             }
+            hm.put(m, simulationsergebnisse);
         }
-        Simulationsergebnis[] res_array = new Simulationsergebnis[simulationsergebnisse.size()];
-        res_array = simulationsergebnisse.toArray(res_array);
-        z.setResults(res_array);
-        float res = z.calculateBest();
-
-
-        return res;
+        return hm;
     }
 }
