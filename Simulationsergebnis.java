@@ -14,32 +14,31 @@ public class Simulationsergebnis {
 		int i = 0; 
 		String out = "A nach 100 Jahren: " + A + "\n";
 		for (double val : avgTenYears) {
-			int i += 1; 
+            i += 1;
 			out += i + " - ";
 			i+= 9;
 			out += " Jahre: " + val +"\n";
 		}
-		for (int i = 0; i < ueberschritten.length; i++) {
-		{
+		for (i = 0; i < ueberschritten.length; i++) {
 			if(ueberschritten[i] > 0) out += "Jahr " + i + " : um " + ueberschritten[i] + "ueberschritten\n";
+        }
 
-
-		}
-			
+        return "";
 	}
+
+    public double getA() {
+        return A;
+    }
+
+    public double[] getAvgTenYears() {
+        return avgTenYears;
+    }
+
+    public double[] getUeberschritten() {
+        return ueberschritten;
+    }
 
 
 
 }
 
-	public double getA() {
-		return A;
-	}
-
-	public double[] getAvgTenYears() {
-		return avgTenYears;
-	}
-
-	public double[] getUeberschritten() {
-		return ueberschritten;
-	}
