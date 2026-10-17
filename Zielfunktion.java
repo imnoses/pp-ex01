@@ -10,7 +10,7 @@ public class Zielfunktion {
         this.results = results;
     }
 
-    public float calculateBest() {
+    public double calculateBest() {
         // bestes M errechnen
         // für jedes kriterium ein ranking und dann über alle rankings ein ranking
 
