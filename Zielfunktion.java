@@ -4,6 +4,11 @@ public class Zielfunktion {
     public Zielfunktion(Simulationsergebnis[] results) {
         this.results = results;
     }
+    public Zielfunktion() {};
+
+    public void setResults(Simulationsergebnis[] results) {
+        this.results = results;
+    }
 
     public float calculateBest() {
         // bestes M errechnen
