@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.random.RandomGenerator;
 
 public class Test {
-    static void main(String[] args) {
+    public static void main(String[] args) {
         RandomGenerator rng = RandomGenerator.getDefault();         // Zufallsgenerator
 
         System.out.println("TESTS UM DIE FUNKTIONALITAET DES PROGRAMMS ZU ÜBERPRÜFEN\n");
@@ -172,7 +172,7 @@ public class Test {
             }
 
             if (jahrBetroffen) {
-                sb.append("Für Jahr ").append(jahr).append(" hat es Überschreitungen von ").append(minUeberschreitung).append(" - ").append(maxUeberschreitung).append(" gegeben! \n");
+                sb.append("Für Jahr ").append(jahr+1).append(" hat es Überschreitungen von ").append(minUeberschreitung).append(" - ").append(maxUeberschreitung).append(" gegeben! \n");
             }
 
         }
