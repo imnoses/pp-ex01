@@ -1,43 +1,29 @@
 /*
- *	Gruppe ppH 11, Aufgabe 1
- *
- *	ARBEITSAUFTEILUNG
- *	Simon Puschmann:
- *		- Entwurf und implementierung des Wettermodells (Random Walk von Temperatur und Wasserstand) und einbettung in Simulation.java
- *		- Festlegen der Konstanten durch experimentieren sodass die Randfälle richtig gedeckt werden.
- *
- *	Gemeinsam:
- *		- Festlegen einer Architektur und gegenseitiges Überprüfen von Code und Kommentaren.
- *
- *
- *	VERWENDUNG VON AI
- *	Simon Puschmann:
- *		- Vormattierung und ausbessern von Rechtschreibfehlen.
- *		- Recherche zu Best-Practice für Random Generator.
- *		- {@code average} wurde von Claude generiert.
- *
- */
+Gruppe ppH 11, Aufgabe 1
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.random.RandomGenerator;
-
-/*
 AUFGABENAUFTEILUNG:
-- Simon Puschmann: Simulation.java
+- Gemeinsam: Festlegen einer Architektur und gegenseitiges Überprüfen von Code und Kommentaren.
+- Simon Puschmann: Entwurf und implementierung des Wettermodells (Random Walk von Temperatur und Wasserstand) und einbettung
+				   in Simulation.java. Festlegen der Konstanten durch experimentieren sodass die Randfälle richtig gedeckt werden.
 - Gioia Frolik: Simulationsergebnis.java & Zielfunktion.java
 - Benjamin Kissinger: Test.java & minimale Anpassungen in Zielfunktion.java (nach Testlauf)
 
 
 KI-NUTZUNG:
 - Simon Puschmann:
+		- Vormattierung und ausbessern von Rechtschreibfehlen.
+		- Recherche zu Best-Practice für Random Generator.
+		- {@code average} wurde von Claude generiert.
 - Gioia Frolik:
 - Benjamin Kissinger: Ich habe keinen Code generieren lassen. Anfangs hab ich mir Unklarheiten zur Aufgabe erklären lassen,
                       später hab ich noch eine Frage zur Zielfunktion gestellt. Diese hat mir empfholen,
                       die Kriterien zu gewichten & eine Strafe bei Budgetüberschreitungen einzubauen (da auch verbal geholfen).
  */
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.random.RandomGenerator;
 
 /**
  * Diese Klasse ist dazu da, die Simulation, das Simulationsergebnis & die Zielfunktion zu testen.
