@@ -55,7 +55,7 @@ public class Test {
 //        for (Simulationsergebnis s : best_m) {
 //            System.out.println(s.printReport());
 //        }
-        System.out.println(final_report(best_m));
+        System.out.println(final_report(best_m, res));
 
     }
 
@@ -120,19 +120,20 @@ public class Test {
      * @param ergebnisse Alle Simulationsergebnisse des besten Ms
      * @return Report als String
      */
-    public static String final_report(ArrayList<Simulationsergebnis> ergebnisse) {
+    public static String final_report(ArrayList<Simulationsergebnis> ergebnisse, double best_m) {
         double minA = Double.POSITIVE_INFINITY;
         double maxA = Double.NEGATIVE_INFINITY;
 
         StringBuilder sb = new StringBuilder();
+
+        sb.append("ERGEBNISSE FÜR DAS BESTE M: ").append(best_m).append("\n");
 
         for (Simulationsergebnis s : ergebnisse) {
             if (s.getA() < minA) minA = s.getA();
             if (s.getA() > maxA) maxA = s.getA();
         }
 
-        sb.append("A nach 100 Jahren ").append(minA).append("-").append(maxA).append("\n");
-
+        sb.append("A nach 100 Jahren ").append(minA).append("-").append(maxA).append("\n\n");
 
         sb.append("Avg10Years: \n");
         for (int i = 0 ; i < 10 ; i++) {
@@ -152,7 +153,7 @@ public class Test {
             sb.append("Jahre ").append(anfang).append("-").append(ende).append(": ").append(minAvg10Years).append(" - ").append(maxAvg10Years).append("\n");
         }
 
-        sb.append("Bugtetüberschreitungen: \n");
+        sb.append("\n Bugtetüberschreitungen: \n");
         boolean uebAufgetreten = false;
 
         for (int jahr = 0 ; jahr < 100 ; jahr++) {
