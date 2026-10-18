@@ -1,3 +1,23 @@
+/*
+ *	Gruppe ppH 11, Aufgabe 1
+ *
+ *	ARBEITSAUFTEILUNG
+ *	Simon Puschmann:
+ *		- Entwurf und implementierung des Wettermodells (Random Walk von Temperatur und Wasserstand) und einbettung in Simulation.java
+ *		- Festlegen der Konstanten durch experimentieren sodass die Randfälle richtig gedeckt werden.
+ *
+ *	Gemeinsam:
+ *		- Festlegen einer Architektur und gegenseitiges Überprüfen von Code und Kommentaren.
+ *
+ *
+ *	VERWENDUNG VON AI
+ *	Simon Puschmann:
+ *		- Vormattierung und ausbessern von Rechtschreibfehlen.
+ *		- Recherche zu Best-Practice für Random Generator.
+ *		- {@code average} wurde von Claude generiert.
+ *
+ */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
