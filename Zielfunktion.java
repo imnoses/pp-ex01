@@ -94,8 +94,20 @@ public class Zielfunktion {
         for (int mIndex = 0; mIndex < 11; mIndex++) {
             // 4 Kriterien -> 4 Ränge
             // durchschnitt der 4
+
+            // Gewichten von a, damit es mehr Einfluss hat
+            double a_gewichtet = 5 * aRank[mIndex];
+
             double overall = (budgetRank[mIndex] + sofortRank[mIndex]
-                    + gleichRank[mIndex] + aRank[mIndex]) / 4.0;
+                    + gleichRank[mIndex] + a_gewichtet) / 4.0;
+
+            double strafe = 0;
+
+            // Wenn es es bei diesem M Bugtetüberschreigungen gab...
+            if (budgetUber[mIndex] > 0) {
+                strafe = 100 + budgetRank[mIndex]*5;
+                overall=overall+strafe;
+            }
 
             // den besten Wert speichern
             if (overall < bestOverall) {
