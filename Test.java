@@ -15,6 +15,8 @@ KI-NUTZUNG:
 		- Recherche zu Best-Practice für Random Generator.
 		- {@code average} wurde von Claude generiert.
 - Gioia Frolik:
+    - (mathematische) Konzepte und deren umsetzung in Java erklären lassen.
+    - schleife für Hilfsmethode vom ranking generieren lasssen mit ChatGPT
 - Benjamin Kissinger: Ich habe keinen Code generieren lassen. Anfangs hab ich mir Unklarheiten zur Aufgabe erklären lassen,
                       später hab ich noch eine Frage zur Zielfunktion gestellt. Diese hat mir empfholen,
                       die Kriterien zu gewichten & eine Strafe bei Budgetüberschreitungen einzubauen (da auch verbal geholfen).

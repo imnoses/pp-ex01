@@ -103,7 +103,7 @@ public class Zielfunktion {
 
             double strafe = 0;
 
-            // Wenn es es bei diesem M Bugtetüberschreigungen gab...
+            // Wenn es es bei diesem M Bugtetüberschreigungen gab
             if (budgetUber[mIndex] > 0) {
                 strafe = 100 + budgetRank[mIndex]*5;
                 overall=overall+strafe;
@@ -126,15 +126,11 @@ public class Zielfunktion {
      * @return geranted array
      */
     private int[] rank(double[] values) {
-        int[] ranks = new int[values.length]; // ranking array
-        // alle werte durchgehen
+        int[] ranks = new int[values.length]; // ranking array -< alle werte durchgehen
         for (int i = 0; i < values.length; i++) {
-            ranks[i] = 1;
-            // mit allen anderen werten vergleichen
+            ranks[i] = 1; // mit allen anderen werten vergleichen
             for (int j = 0; j < values.length; j++)
-                if (values[j] < values[i]) {
-                    ranks[i]++; // pro wert der kleiner ist rank erhöhen
-                }
+                if (values[j] < values[i]) { ranks[i]++; } // pro wert der kleiner ist rank erhöhen
         }
         return ranks;
     }
