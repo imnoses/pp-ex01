@@ -24,8 +24,42 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
+/*
+AUFGABENAUFTEILUNG:
+- Simon Puschmann: Simulation.java
+- Gioia Frolik: Simulationsergebnis.java & Zielfunktion.java
+- Benjamin Kissinger: Test.java & minimale Anpassungen in Zielfunktion.java (nach Testlauf)
+
+
+KI-NUTZUNG:
+- Simon Puschmann:
+- Gioia Frolik:
+- Benjamin Kissinger: Ich habe keinen Code generieren lassen. Anfangs hab ich mir Unklarheiten zur Aufgabe erklären lassen,
+                      später hab ich noch eine Frage zur Zielfunktion gestellt. Diese hat mir empfholen,
+                      die Kriterien zu gewichten & eine Strafe bei Budgetüberschreitungen einzubauen (da auch verbal geholfen).
+ */
+
+/**
+ * Diese Klasse ist dazu da, die Simulation, das Simulationsergebnis & die Zielfunktion zu testen.
+ * Dabei wird sich an die Vorgaben der Angabe gehalten.
+ * Als erstes werden drei spezifische Randfälle getestet:
+ * - M=0% & A=1.0
+ * - M=100% & A=1.7
+ * - M=0% & A=1.7
+ *
+ * Anschließend folgen 88 Simulationsdurchläufe.
+ * Für jene Simulationsergebnisse mit dem besten M,
+ * werden die wichtigsten Eckpunkte zusammengefasst ausgegeben.
+ *
+ */
 public class Test {
-    static void main(String[] args) {
+
+    /**
+     * Main-Methode dieser Testklasse.
+     * Führt die Tests aus.
+     * @param args Args für Terminal
+     */
+    public static void main(String[] args) {
         RandomGenerator rng = RandomGenerator.getDefault();         // Zufallsgenerator
 
         System.out.println("TESTS UM DIE FUNKTIONALITAET DES PROGRAMMS ZU ÜBERPRÜFEN\n");
@@ -65,16 +99,20 @@ public class Test {
         // ArrayList to array für die Zielfunktion
         Simulationsergebnis[] res_array = new Simulationsergebnis[simulationsergebnisse.size()];
         res_array = simulationsergebnisse.toArray(res_array);
+
+        // Zielfunktion berechnet das beste m
         Zielfunktion z = new Zielfunktion(res_array);
         double res = z.calculateBest();
 
         // Arraylist mit allen Simulationsergebnissen für das beste M
         ArrayList<Simulationsergebnis> best_m = hm.get(res);
 
-//        String final_report = "BESTES ERGEBNIS HAT M = " + res + "\n Hier sind alle Ergebnisse mit M = " + res + ": \n";
-//        for (Simulationsergebnis s : best_m) {
-//            System.out.println(s.printReport());
-//        }
+        /*
+        final_report berechnet und gibt zurück für das beste m:
+        - das A nach 100 Jahren für alle A-Anfangswerte (min&max)
+        - Für alle 10 Jahre min&max Werte für die Sofortmaßnahmen für alle As
+        - Alle Budgetüberschreitungen für alle As mit min&max Werten
+         */
         System.out.println(final_report(best_m, res));
 
     }
@@ -124,6 +162,7 @@ public class Test {
 
         Simulationsergebnis current;
 
+        // Für alle Ms & As (==> 11*8 = 88 Durchläufe) die Simulation starten und speichern.
         for (double m : m_s) {
             ArrayList<Simulationsergebnis> simulationsergebnisse = new ArrayList<>();
             for (double a : a_s) {
@@ -141,6 +180,8 @@ public class Test {
      * @return Report als String
      */
     public static String final_report(ArrayList<Simulationsergebnis> ergebnisse, double best_m) {
+
+        // Die finale A-Range berechnen
         double minA = Double.POSITIVE_INFINITY;
         double maxA = Double.NEGATIVE_INFINITY;
 
@@ -155,7 +196,8 @@ public class Test {
 
         sb.append("A nach 100 Jahren ").append(minA).append("-").append(maxA).append("\n\n");
 
-        sb.append("Avg10Years: \n");
+        // Die finale Sofortmassnahmen-Range berechnen
+        sb.append("Sofortmassnahmen Avg10Years: \n");
         for (int i = 0 ; i < 10 ; i++) {
             double minAvg10Years = Double.POSITIVE_INFINITY;
             double maxAvg10Years = Double.NEGATIVE_INFINITY;
@@ -173,6 +215,7 @@ public class Test {
             sb.append("Jahre ").append(anfang).append("-").append(ende).append(": ").append(minAvg10Years).append(" - ").append(maxAvg10Years).append("\n");
         }
 
+        // Die finale Budgetüberschreitungen-Range berechnen
         sb.append("\n Bugtetüberschreitungen: \n");
         boolean uebAufgetreten = false;
 
@@ -192,7 +235,7 @@ public class Test {
             }
 
             if (jahrBetroffen) {
-                sb.append("Für Jahr ").append(jahr).append(" hat es Überschreitungen von ").append(minUeberschreitung).append(" - ").append(maxUeberschreitung).append(" gegeben! \n");
+                sb.append("Für Jahr ").append(jahr+1).append(" hat es Überschreitungen von ").append(minUeberschreitung).append(" - ").append(maxUeberschreitung).append(" gegeben! \n");
             }
 
         }
